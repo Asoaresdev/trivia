@@ -1,8 +1,8 @@
 
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
-import Home from "./pages/Home/Home";
-
+import { CssBaseline } from '@material-ui/core'
+import Router from './routes/Router'
 
 function App() {
 
@@ -19,7 +19,9 @@ function App() {
   return (
     <ThemeProvider theme= { theme } >
       <div>
-        <Home />
+        <CssBaseline >
+          <Router />
+        </CssBaseline>
       </div>
     </ThemeProvider>
   );

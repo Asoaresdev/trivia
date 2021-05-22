@@ -12,7 +12,7 @@ export const Container = styled.section`
         font-size: 2rem;
     }
     h3 {
-        padding: 2rem 0 3rem 0;
+        padding: 1rem 0 1.5rem 0;
     }
 `
 
@@ -29,4 +29,5 @@ export const ContainerInputButton = styled.div`
 
 export const ButtonStyles = styled(Button)`
     height: 2.4rem;
+    margin-top: 2rem;
 `
