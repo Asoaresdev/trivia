@@ -9,7 +9,7 @@ export const Container = styled.section`
 `
 
 export const ContainerButtons = styled.div`
-    display: inline-flex;
+    display: flex;
     width: 20rem;
     justify-content: space-between;
     padding: 2.5rem 0;

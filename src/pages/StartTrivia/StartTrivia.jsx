@@ -15,6 +15,7 @@ export default function StartTrivia() {
     const [options, setOptions] = React.useState({})
     const [listQuestions, setLIstQuestions] = React.useState([])
     const [showButton, setShowBUtton] = React.useState(false)
+    const [showStartButton , setShowStartButton] = React.useState(true)
 
     const pathParams = useParams();
 
@@ -25,6 +26,7 @@ export default function StartTrivia() {
         .then((response) => {
             setLIstQuestions(response.data.results)
             setShowBUtton(true)
+            setShowStartButton(false)
            
             // setting indexed options with correct answers
             const newOptions = {}
@@ -77,6 +79,7 @@ export default function StartTrivia() {
   
     return (
         <Container>
+            {showStartButton &&
             <ContainerButtons>
                 <ButtonsStyle 
                     variant="contained" 
@@ -94,19 +97,30 @@ export default function StartTrivia() {
                     </ButtonsStyle>
                 </Link>
             </ContainerButtons>
+            }
             <section>
                 { listQuestions ? allQuestions : null }
             </section>
             { showButton &&  
-            <Link to = { '/result' }>                
-                <ButtonsStyle 
-                    variant="contained" 
-                    color="secondary"
-                    onClick={ sendAnswers }
-                >
-                    Send
-                </ButtonsStyle>
-            </Link>
+            <ContainerButtons>
+                <Link to = { '/result' }>                
+                    <ButtonsStyle 
+                        variant="contained" 
+                        color="secondary"
+                        onClick={ sendAnswers }
+                    >
+                        Send
+                    </ButtonsStyle>
+                </Link>
+                    <Link to = { '/' }>
+                        <ButtonsStyle 
+                            variant="contained" 
+                            color="secondary"
+                        >
+                            Cancel
+                        </ButtonsStyle>
+                    </Link>
+            </ContainerButtons>
             }   
         </Container>
     )
