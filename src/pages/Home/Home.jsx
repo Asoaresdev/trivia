@@ -1,9 +1,10 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
-import { Container, ContainerInputButton, ButtonStyles } from './style'
-import { useForm } from '../../hooks/useForm';
+import { Container, ContainerInputButton, ButtonStyles, FormStyle, Warning, ParagraphQuestion } from './style'
+import { useForm } from '../../hooks/useForm'
 import { goToTriviaPage } from '../../routes/coordinators'
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom"
+import { Link } from 'react-router-dom'
 
 export default function Home() {
 
@@ -20,34 +21,43 @@ export default function Home() {
         setShowAlert(false)
     }
   
-   const start = (event) => {
-    console.log('Aqui');
-    if(form.number > 0) {
-        goToTriviaPage(history, form.number)
-        resetState()
-    }else{
-            setShowAlert(true)
-    }   
-   }
+    const start = (event) => {
+        event.preventDefault()
+        if(form.number > 0 && form.number < 999) {
+            goToTriviaPage(history, form.number)
+            resetState()
+        }else{
+                setShowAlert(true)
+                resetState()
+        }   
+    }
 
     return (
         <div>
             <Container>
+                {localStorage.userOptions ?  
+                <Link to = { '/result' }>                
+                    <ButtonStyles 
+                        variant="contained" 
+                        color="secondary"
+                        size="small"
+                    >
+                        Resultado anterior
+                    </ButtonStyles>
+                </Link> : 
+                null}
                 <h1>Conhecimentos Gerais</h1>
-                <form 
-                    // onSubmit={ handleSubmition }
-                >
+               
                     <ContainerInputButton>
-                        <h3>Quantas perguntas você quer responder?</h3>
+                        <ParagraphQuestion>Quantas perguntas você quer responder?</ParagraphQuestion>
+                        <FormStyle onSubmit={ start }>
                         <TextField
                             required
                             id="standard-number"
                             type='number'
-                            min='0.000001'
                             label="Número"
                             name='number'
-                            inputProps={{ pattern:'[0-9]{3}' }} 
-                            title='numeros positivos'
+                            placeholder='até 3 dígitos'
                             value = { form.number }
                             onChange={ handleInputChange }
                             InputLabelProps={{
@@ -55,22 +65,18 @@ export default function Home() {
                             }}
                             variant="outlined"
                             size="small"
-                            placeholder="00"
-                            
                         />
-                        
                         <ButtonStyles 
                             variant="contained" 
                             color="secondary"
-                            onClick = {start}
+                            type='submit'
                         >
                         OK
                         </ButtonStyles>
 
-                    {showAlert && <p>Preencha um valor válido, por favor</p>}
-                    </ContainerInputButton>
-                </form>  
-                
+                    </FormStyle> 
+                    {showAlert && <Warning>Preencha um valor entre 1 e 999, por favor</Warning>}
+                    </ContainerInputButton> 
             </Container>
         </div>
     )

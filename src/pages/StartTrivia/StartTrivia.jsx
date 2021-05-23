@@ -1,6 +1,6 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Container, ContainerButtons, ButtonsStyle, ContainerQuestions } from './style'
 import axios from 'axios'
 import Radio from '@material-ui/core/Radio'
@@ -18,8 +18,6 @@ export default function StartTrivia() {
 
     const pathParams = useParams();
 
-    
-    
     const questionAnswerOrder = Array.from({length: Number(pathParams.number)}, () => Array.from({length: 50}, () => Math.random()))
     
     const startTrivia = () => {
@@ -48,13 +46,10 @@ export default function StartTrivia() {
         newOptions[answerObject.question_id].selectedAnswer = answerObject.answer
         setOptions(newOptions)
     }
-    console.log(options);
 
     
     const allQuestions = listQuestions.map((item, i) => {
-        
         const allAnswers = [...item.incorrect_answers, item.correct_answer].sort((_, j) => .5 - questionAnswerOrder[i][j])
-        
         return(
             <ContainerQuestions key={ item.question }>
                 <FormControl component="fieldset">
@@ -72,20 +67,14 @@ export default function StartTrivia() {
                     })}
                     </RadioGroup>
                 </FormControl>
-                
             </ContainerQuestions>
-
         )
     })
 
    const sendAnswers = () => {
-       
-    window.localStorage.setItem('userOptions', JSON.stringify(options))
+    localStorage.setItem('userOptions', JSON.stringify(options))
    }
-
-   const teste = localStorage.getItem('userOptions')
-   console.log(teste);
-    
+  
     return (
         <Container>
             <ContainerButtons>
@@ -107,7 +96,6 @@ export default function StartTrivia() {
             </ContainerButtons>
             <section>
                 { listQuestions ? allQuestions : null }
-               
             </section>
             { showButton &&  
             <Link to = { '/result' }>                
@@ -119,8 +107,7 @@ export default function StartTrivia() {
                     Send
                 </ButtonsStyle>
             </Link>
- }
-            
+            }   
         </Container>
     )
 }
