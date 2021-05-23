@@ -7,27 +7,44 @@ export const Container = styled.section`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding-top: 2rem;
     h1 {
         padding: 2.5rem 0 0 0;
         font-size: 2rem;
     }
-    h3 {
-        padding: 1rem 0 1.5rem 0;
-    }
+`
+
+export const ParagraphQuestion = styled.p`
+    padding: 0 0 2rem 0;
+    font-size: 1.25rem;
+    margin: 0;
+
 `
 
 export const ContainerInputButton = styled.div`
     display: flex;
-    justify-content: space-around;
     align-items: center;
     flex-direction: column;
     border: 1px dashed lightgray;
     min-height:25vh ;
-    padding: 2rem;
+    padding: 4rem;
     border-radius: 0.4rem;
+    
 `
 
 export const ButtonStyles = styled(Button)`
     height: 2.4rem;
-    margin-top: 2rem;
+    
+`
+
+export const FormStyle = styled.form`
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+`
+
+export const Warning = styled.p`
+    padding-top: 0.5rem;
+    color: red;
+
 `
