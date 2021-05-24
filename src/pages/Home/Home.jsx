@@ -1,10 +1,10 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
-import { Container, ContainerInputButton, ButtonStyles, FormStyle, Warning, ParagraphQuestion } from './style'
 import { useForm } from '../../hooks/useForm'
 import { goToTriviaPage } from '../../routes/coordinators'
 import { useHistory } from "react-router-dom"
 import { Link } from 'react-router-dom'
+import { Container, ContainerInputButton, ButtonStyles, FormStyle, Warning, ParagraphQuestion } from './style'
 
 export default function Home() {
 
@@ -23,7 +23,7 @@ export default function Home() {
   
     const start = (event) => {
         event.preventDefault()
-        if(form.number > 0 && form.number < 999) {
+        if(form.number > 0 && form.number < 100) {
             goToTriviaPage(history, form.number)
             resetState()
         }else{
@@ -57,7 +57,7 @@ export default function Home() {
                             type='number'
                             label="Número"
                             name='number'
-                            placeholder='até 3 dígitos'
+                            placeholder='1 a 100'
                             value = { form.number }
                             onChange={ handleInputChange }
                             InputLabelProps={{
