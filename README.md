@@ -33,6 +33,8 @@ Clonar o repositório.
 
 Entrar na pasta.
 
+No terminal, usar o comando 'npm install' ou 'yarn install' para instalar as dependências.
+
 No terminal, usar o comando 'npm start' ou 'yarn start'.
 
 Abrir no navegador [http://localhost:3000]
