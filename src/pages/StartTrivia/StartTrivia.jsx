@@ -28,7 +28,7 @@ export default function StartTrivia() {
             setShowBUtton(true)
             setShowStartButton(false)
            
-            // montando objeto com perguntas, respostas corretas e incorreta e a selecionada
+            // montando objeto com perguntas, respostas corretas e incorretas e a selecionada
             const initialOptions = {}
             response.data.results.forEach((item, i) => {            
                 initialOptions[i] = {'question': item.question,'correctAnswer': item.correct_answer, 'selectedAnswer': null}
