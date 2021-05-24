@@ -1,13 +1,13 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { Container, ContainerButtons, ButtonsStyle, ContainerQuestions } from './style'
 import axios from 'axios'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
+import { Container, ContainerButtons, ButtonsStyle, ContainerQuestions } from './style'
 
 
 export default function StartTrivia() {
@@ -28,13 +28,12 @@ export default function StartTrivia() {
             setShowBUtton(true)
             setShowStartButton(false)
            
-            // setting indexed options with correct answers
-            const newOptions = {}
-            response.data.results.forEach((item, i) =>
-            {
-              newOptions[i] = {'question': item.question,'correctAnswer': item.correct_answer, 'selectedAnswer': null}
+            // montando objeto com perguntas, respostas corretas e incorreta e a selecionada
+            const initialOptions = {}
+            response.data.results.forEach((item, i) => {            
+                initialOptions[i] = {'question': item.question,'correctAnswer': item.correct_answer, 'selectedAnswer': null}
             })
-            setOptions(newOptions)
+            setOptions(initialOptions)
         })
         .catch((error) => {
             alert('Algo deu errado para acessar as perguntas, tente novamente.')
@@ -49,22 +48,21 @@ export default function StartTrivia() {
         setOptions(newOptions)
     }
 
-    
     const allQuestions = listQuestions.map((item, i) => {
         const allAnswers = [...item.incorrect_answers, item.correct_answer].sort((_, j) => .5 - questionAnswerOrder[i][j])
         return(
             <ContainerQuestions key={ item.question }>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">
-                        { i+1 } - { item.question }
+                        { i + 1 } - { item.question }
                     </FormLabel>
-                    <RadioGroup aria-label={item.question} name={item.question}  onChange={handleChange}>
+                    <RadioGroup aria-label={ item.question } name={ item.question }  onChange={ handleChange }>
                         { allAnswers.map((answer, j) => {
 
                         const answerJson = JSON.stringify({'question_id': i, 'answer_id':j, 'answer': answer})
                         
                         return (
-                            <FormControlLabel key= {answer} value={answerJson} control={<Radio />} label={answer} />
+                            <FormControlLabel key= { answer } value={ answerJson } control={<Radio />} label={ answer } />
                         )
                     })}
                     </RadioGroup>
@@ -79,29 +77,34 @@ export default function StartTrivia() {
   
     return (
         <Container>
-            {showStartButton &&
-            <ContainerButtons>
-                <ButtonsStyle 
-                    variant="contained" 
-                    color="secondary"
-                    onClick={ startTrivia }
-                >
-                    Start
-                </ButtonsStyle>
-                <Link to = { '/' }>
+            {
+            showStartButton &&
+            <div>
+                <p>Vamos começar?</p>
+                <ContainerButtons>
                     <ButtonsStyle 
                         variant="contained" 
                         color="secondary"
+                        onClick={ startTrivia }
                     >
-                        Cancel
+                        Start
                     </ButtonsStyle>
-                </Link>
-            </ContainerButtons>
+                    <Link to = { '/' }>
+                        <ButtonsStyle 
+                            variant="contained" 
+                            color="secondary"
+                        >
+                            Cancel
+                        </ButtonsStyle>
+                    </Link>
+                </ContainerButtons>
+            </div>
             }
             <section>
                 { listQuestions ? allQuestions : null }
             </section>
-            { showButton &&  
+            { 
+            showButton &&  
             <ContainerButtons>
                 <Link to = { '/result' }>                
                     <ButtonsStyle 

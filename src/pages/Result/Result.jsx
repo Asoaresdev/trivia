@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container, ContainerTable, ButtonsStyle } from './style'
 import { Link } from 'react-router-dom';
+import { Container, ContainerTable, ButtonsStyle } from './style'
 
 export default function Result() {
 
@@ -9,30 +9,32 @@ export default function Result() {
     const questions = Object.keys(options)
 
     // eslint-disable-next-line array-callback-return
-    const result = Object.keys(options).filter((key) => {
+    const result = questions.filter((key) => {
         if(options[key].correctAnswer === options[key].selectedAnswer){
             return options[key].selectedAnswer
         } 
     })
+    
 
     const percentage = result.length/questions.length * 100
+    
 
-    console.log(percentage);
     return (
         <Container>
             <div>
-            <Link to = { '/' }>
-                        <ButtonsStyle 
-                            variant="contained" 
-                            color="secondary"
-                        >
-                            Home
-                        </ButtonsStyle>
-                    </Link>
-                <p>Você acertou {percentage.toFixed()}% <br></br>{result.length} acerto(s) de {questions.length} pergunta(s)</p>   
+                <Link to = { '/' }>
+                    <ButtonsStyle 
+                        variant="contained" 
+                        color="secondary"
+                    >
+                        Home
+                    </ButtonsStyle>
+                </Link>
+                {percentage >= 50 ? <p>😀</p> : <p>😯</p> }
+                <p>Você acertou {percentage.toFixed()}%  <br></br>{result.length} acerto(s) de {questions.length} pergunta(s)</p>   
                 
                 </div>
-            <ContainerTable cellPadding={0}>
+            <ContainerTable>
                 <thead>
                     <tr>
                         <th>Questão</th>
@@ -45,10 +47,10 @@ export default function Result() {
                 {Object.keys(options).map(key => {
                     return(
                         <tr key={key}>
-                           <td style={{width:450}}>{options[key].question}</td> 
-                           <td style={{width:250}}>{options[key].correctAnswer}</td> 
-                           <td style={{width:250}}>{options[key].selectedAnswer}</td> 
-                           {options[key].correctAnswer === options[key].selectedAnswer ? <td style={{width:50}}>✔</td> : <td style={{width:50}}>❌</td> }
+                           <td >{options[key].question}</td> 
+                           <td >{options[key].correctAnswer}</td> 
+                           <td >{options[key].selectedAnswer}</td> 
+                           {options[key].correctAnswer === options[key].selectedAnswer ? <td style={{width:50}}>✔</td> : <td >❌</td> }
                         </tr>
                     )
                 })}

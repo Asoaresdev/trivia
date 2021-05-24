@@ -9,7 +9,7 @@ export default function Error() {
     return (
         <Container>
             <Link to={ "/" }>
-                <Button variant="outlined" color="primary">Home</Button>
+                <Button variant="contained"  color="primary">Home</Button>
             </Link>
             <h2>Oohh, não! Algo deu errado</h2>
             <img src={image} alt="" />

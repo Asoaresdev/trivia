@@ -25,7 +25,7 @@ export const ContainerInputButton = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    border: 1px dashed lightgray;
+    border:1px dashed rgba(255,184,0, 0.3);
     min-height:25vh ;
     padding: 4rem;
     border-radius: 0.4rem;
