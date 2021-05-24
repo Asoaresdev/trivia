@@ -33,7 +33,7 @@ export default function Result() {
                 {percentage >= 50 ? <p>😀</p> : <p>😯</p> }
                 <p>Você acertou {percentage.toFixed()}%  <br></br>{result.length} acerto(s) de {questions.length} pergunta(s)</p>   
                 
-                </div>
+            </div>
             <ContainerTable>
                 <thead>
                     <tr>

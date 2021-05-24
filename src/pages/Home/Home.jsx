@@ -27,8 +27,8 @@ export default function Home() {
             goToTriviaPage(history, form.number)
             resetState()
         }else{
-                setShowAlert(true)
-                resetState()
+            setShowAlert(true)
+            resetState()
         }   
     }
 
